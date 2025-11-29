@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EnglishTopia — Языковой лагерь с ролевым погружением</title>
+    <style>
+        :root {
+            --primary: #FFD700;
+            --secondary: #FFA500;
+            --tertiary: #FFB366;
+            --light: #FFF5E6;
+            --dark: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--light) 0%, var(--tertiary) 50%, var(--secondary) 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.4s ease;
+        }
+
+        .logo-wrapper:hover {
+            transform: scale(1.04);
+        }
+
+        .logo {
+            height: 90px;
+            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.22));
+        }
+
+        nav {
+            position: absolute;
+            bottom: -32px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.96);
+            padding: 8px 24px;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.09);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 22px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--dark);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 20px 70px;
+            background: url('https://i.postimg.cc/DzPxK3rK/O1NX6Wx-CSb-ma8Ezz-WDn-R1owgquzmx7Lssx88t-Vba-Hz4b-B8P8jl-T5Jh-Ri7d-Px-Vv-P9r8CVin-Wyn-X19Nix3Vmnq-B.jpg') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            color: white;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.1rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            line-height: 1.2;
+        }
+
+        .tagline {
+            font-size: 1.45rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin: 0 auto 30px;
+            line-height: 1.7;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .section {
+            padding: 60px 20px;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.3rem;
+            margin-bottom: 40px;
+            color: var(--dark);
+            position: relative;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .why-us, .faq-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px auto;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .why-us-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .why-us-list li {
+            margin-bottom: 22px;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .why-us-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 2rem;
+            top: -5px;
+            font-weight: bold;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .activities-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .activity-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .activity-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .activity-card:hover .activity-img {
+            transform: scale(1.05);
+        }
+
+        .activity-content {
+            padding: 18px;
+        }
+
+        .activity-content h3 {
+            color: var(--secondary);
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        /* Отзывы родителей */
+        .testimonials-container {
+            max-width: 800px;
+            margin: 40px auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .testimonial-item {
+            background: rgba(255, 255, 255, 0.92);
+            padding: 24px;
+            border-radius: 18px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+            border-left: 4px solid var(--tertiary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .testimonial-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .testimonial-text {
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+            line-height: 1.65;
+            color: var(--dark);
+        }
+
+        .testimonial-text:last-child {
+            margin-bottom: 16px;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--secondary);
+            font-style: normal;
+            margin-top: 8px;
+            text-align: right;
+        }
+
+        .faq-item {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--tertiary);
+        }
+
+        .faq-question {
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            transition: color 0.2s ease;
+        }
+
+        .faq-question:hover {
+            color: var(--primary);
+        }
+
+        .faq-answer {
+            margin-top: 12px;
+            display: none;
+            line-height: 1.7;
+            padding: 12px 15px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .faq-question.active + .faq-answer {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .countdown {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px auto;
+            max-width: 500px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 45px 20px 30px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .contact-item {
+            margin: 8px 0;
+            font-size: 1.05rem;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            background: var(--tertiary);
+            color: var(--dark);
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin: 8px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 179, 102, 0.3);
+            font-size: 1.05rem;
+        }
+
+        .contact-btn:hover {
+            background: linear-gradient(to right, #FFA500, #FF8A65);
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 6px 15px rgba(255, 179, 102, 0.5);
+            color: white;
+        }
+
+        .copyright {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                height: 100px;
+            }
+            .logo {
+                height: 70px;
+            }
+            nav {
+                bottom: -36px;
+                padding: 8px 16px;
+            }
+            nav ul {
+                gap: 14px;
+            }
+            nav a {
+                padding: 6px 12px;
+                font-size: 0.92rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-wrapper">
+            <img src="https://i.postimg.cc/L6Prr4V7/acetone-20251129-20373-608.png" alt="EnglishTopia" class="logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#activities">Активности</a></li>
+                <li><a href="#testimonials">Отзывы</a></li>
+                <li><a href="#faq">Вопросы</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h1>EnglishTopia — языковой лагерь с ролевым погружением</h1>
+                <p class="tagline">Английский. Без стресса. С заботой.</p>
+                <p>Дорогие родители, если вы ищете полезный и безопасный формат летнего отдыха для ребёнка — обратите внимание на лагерь EnglishTopia.<br>Это не просто смена, это — полное погружение в английский язык, даже для начинающих!</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="countdown">
+                Следующая смена: <strong>8–11 января</strong>
+            </div>
+
+            <section class="why-us">
+                <h2 class="section-title">Почему выбирают нас?</h2>
+                <ul class="why-us-list">
+                    <li><strong>Английский 24/7</strong> — весь день на английском: игры, общение, мероприятия и вечерние шоу.</li>
+                    <li><strong>Языковые интенсивы</strong> — занятия проходят весело, с упором на разговорную практику.</li>
+                    <li><strong>Крафтовые мастер-классы</strong> на английском языке развивают креативность и помогают практиковать язык.</li>
+                    <li><strong>Опытные педагоги</strong> — умеют поддержать, замотивировать и создать тёплую атмосферу, даже если ребёнок только начинает учить язык.</li>
+                </ul>
+            </section>
+
+            <section class="section" id="activities">
+                <h2 class="section-title">Наши активности</h2>
+                <div class="activities-grid">
+                    <!-- Приключенческие игры -->
+                    <div class="activity-card">
+                        <img src="https://i.postimg.cc/CKgctxfQ/BTeso0a-HX-N2aai0Hz-Ee-KGMs3VPTrp8Nbf-Kya32m-SIT1Eh-Ldd-Syl-U4MQ612HTIp-Wo-YSx-BGUTc-J57Mo3g-9spoxlm.jpg" alt="Приключенческие игры" class="activity-img">
+                        <div class="activity-content">
+                            <h3>Приключенческие игры</h3>
+                            <p>Квесты и командные испытания на английском!</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Творческие мастер-классы -->
+                    <div class="activity-card">
+                        <img src="https://i.postimg.cc/KzcJGpfS/y-Rm-Zh-TRN1z-NSd-k0Qor-FDo925hje-R-Mql8Pt-I8TB9qkpz8C-O2i-MI2hq-Dlzel-Up5Or-NZy-Re-Czhk-JMDg-HExej4.jpg" alt="Творческие мастер-классы" class="activity-img">
+                        <div class="activity-content">
+                            <h3>Творческие мастерские</h3>
+                            <p>Рисуем, лепим и создаём — всё на английском!</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Спортивные игры -->
+                    <div class="activity-card">
+                        <img src="https://i.postimg.cc/vmt0dwW7/DEUQz0hdl4X0Y73Jjshi-XGw-Ovmh-NU6jhej2Iuq-S3Uto-CCJOTS1W9y5zf-Jt-RTIs-Ug3BKKFCibu-Hz7bqr-HVGxc-Pbr-I.jpg" alt="Спортивные игры" class="activity-img">
+                        <div class="activity-content">
+                            <h3>Спортивные игры</h3>
+                            <p>Футбол, эстафеты, подвижные игры — на английском языке!</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Вечерние шоу -->
+                    <div class="activity-card">
+                        <img src="https://i.postimg.cc/636YWbcB/Yvl-Rz-GLbl-ZE045RFq-Wcl-Iqm-Bv7-De-Uh6i-Kq-F2BDYna9z4v-Iez-Oj4Lp33Y-F8Szze-Clnp-L2Oo-OU53yv-Ar-c-em.jpg" alt="Вечерние шоу" class="activity-img">
+                        <div class="activity-content">
+                            <h3>Вечерние шоу</h3>
+                            <p>Талант-шоу, караоке и театр — всё по-английски!</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Языковые игры -->
+                    <div class="activity-card">
+                        <img src="https://i.postimg.cc/cJBFNGRZ/Uj7h3Fk-T4-u-GJt-Cgxg-Hq-Yud-GZa-HYBx7Wo-Cmy-cqre-Cjq5-l-Zod-DQh-Pm-AZr-Xs7CRw6Vf8ex8FW2i-C1Q3o2M0hw.jpg" alt="Языковые игры" class="activity-img">
+                        <div class="activity-content">
+                            <h3>Языковые игры</h3>
+                            <p>Словесные баталии, квизы и дебаты — учимся играя!</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Команда организаторов -->
+                    <div class="activity-card">
+                        <img src="https://i.postimg.cc/8kdZgF6K/Snimok-ekrana-2025-11-29-v-21-12-40.png" alt="Команда организаторов" class="activity-img">
+                        <div class="activity-content">
+                            <h3>Команда организаторов</h3>
+                            <p>Профессионалы, которые знают, как сделать ваше лето незабываемым.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Отзывы родителей -->
+            <section class="section" id="testimonials">
+                <h2 class="section-title">Отзывы родителей</h2>
+                <div class="testimonials-container">
+                    <div class="testimonial-item">
+                        <p class="testimonial-text">Большая благодарность всему педагогическому составу и Юлии Викторовне!</p>
+                        <p class="testimonial-text">Мы впервые попали в дружную семью Englishtopia... И случилась 🩷</p>
+                        <p class="testimonial-text">Таня приехала в лагерь и были слезы при расставании с мамой, а уезжала и снова были слезы, но в этот раз от разлуки с ребятами🙂</p>
+                        <p class="testimonial-author">— Юлия С.</p>
+                    </div>
+
+                    <div class="testimonial-item">
+                        <p class="testimonial-text">Алена, Юлия, Екатерина, все сопричастные к этому проекту, я заранее знала, что в такой команде будет круто, каждый день насыщенный, интересный. Ждём осенний лагерь. 🤩💗</p>
+                        <p class="testimonial-author">— Евгения А.</p>
+                    </div>
+
+                    <div class="testimonial-item">
+                        <p class="testimonial-text">Я хочу выразить огромную благодарность Юлии Викторовне и всем остальным вожатым инглиштопии☀️ Вы большие молодцы! То, что вы делаете просто поражает! Сколько всего придумали, организовали для наших детей.</p>
+                        <p class="testimonial-text">Было так круто, весело и интересно! Всю обратную дорогу дети восторженно и с большой любовью рассказывали, как отдыхали, играли, репетировали, как им всё понравилось — и на следующий год они поедут снова в лагерь 🥰</p>
+                        <p class="testimonial-text">Спасибо вам большое за ваш труд и заботу о детях!</p>
+                        <p class="testimonial-author">— Елена Ю.</p>
+                    </div>
+
+                    <div class="testimonial-item">
+                        <p class="testimonial-text">Спасибо большое всем-всем-всем за чудесный отдых наших детей! Айва, вам отдельное спасибо! Артëм со Стëпой скучают... попала к ним в самое сердечко. 🩷</p>
+                        <p class="testimonial-text">Они с утра поют и танцуют macarena 😁. Концерт был чудесный и очень трогательный. 🥹 Очень грустно было расставаться, но ребята нашли много новых друзей — и это здорово!</p>
+                        <p class="testimonial-text">Будем на связи! В следующем году обязательно встретимся! 😉😊🙂</p>
+                        <p class="testimonial-author">— Елена С.</p>
+                    </div>
+
+                    <div class="testimonial-item">
+                        <p class="testimonial-text">Доброе утро! Спасибо всему коллективу за хорошо организованный отдых, за интересные мероприятия для детей и с пользой проведённое детьми время!</p>
+                        <p class="testimonial-text">Погода немного подвела, но это нисколько не испортило впечатления!</p>
+                        <p class="testimonial-author">— Елена К.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="faq">
+                <h2 class="section-title">Часто задаваемые вопросы</h2>
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question">Как записаться?</div>
+                        <div class="faq-answer">
+                            Позвоните нам или напишите в любом мессенджере или в ВК.
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Когда проходят смены?</div>
+                        <div class="faq-answer">
+                            В период летних и зимних каникул. Ближайшая смена с 8 января по 11 января.
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Что входит в стоимость?</div>
+                        <div class="faq-answer">
+                            Пятиразовое питание, проживание в четырёхместных номерах, языковая программа, приветственный пакет.
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Как обеспечивается безопасность?</div>
+                        <div class="faq-answer">
+                            Территория охраняется 24/7, видеонаблюдение, педагоги и вожатые находятся с детьми всё время.
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Можно ли навещать ребёнка?</div>
+                        <div class="faq-answer">
+                            Да! У нас есть специальные дни для посещения. Передать вещи можно в любой день, предварительно, связавшись с организаторами.
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Телефоны для связи</h3>
+                    <div class="contact-item">+7 (950) 763-47-34</div>
+                    <div class="contact-item">+7 (950) 779-72-86</div>
+                </div>
+                <div class="footer-section">
+                    <h3>Напишите нам</h3>
+                    <a href="https://vk.com/englishtopia" target="_blank" class="contact-btn">
+                        VK: englishtopia
+                    </a>
+                    <a href="https://t.me/EnglishTopiaproject" target="_blank" class="contact-btn">
+                        Telegram: EnglishTopiaproject
+                    </a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 EnglishTopia — Языковой лагерь с ролевым погружением. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => q.classList.toggle('active'));
+        });
+    </script>
+</body>
+</html>
